@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for deploying Talend EBS on Kubernetes
+name: karaf
+version: 0.1.0

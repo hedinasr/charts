@@ -1,0 +1,44 @@
+# Default values for karaf.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: localhost:5000 #nginx
+  tag: deployer:0.1 #stable
+  pullPolicy: IfNotPresent
+services:
+    # Used to create an Ingress record.
+  - host: karaf-ui.minikube
+    name: ui
+    externalPort: 8040
+    internalPort: 8040
+    # Used to create an Ingress record.
+  - host: karaf-ws1.minikube
+    name: ws1
+    externalPort: 8090
+    internalPort: 8090
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+ingress:
+  enabled: traefik
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    # kubernetes.io/tls-acme: "true"
+    #tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
